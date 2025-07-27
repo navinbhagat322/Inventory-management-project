@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Inventory Management API
+  version: 1.0.0
+paths:
+  /auth/login:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: { type: string }
+                password: { type: string }
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token: { type: string }
+                  user: { type: object }
+        '401':
+          description: Invalid credentials
+  /products:
+    post:
+      summary: Create a product
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                type: { type: string }
+                sku: { type: string }
+                image_url: { type: string }
+                description: { type: string }
+                quantity: { type: integer }
+                price: { type: number }
+      responses:
+        '201':
+          description: Product created
+    get:
+      summary: Get all products
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+      responses:
+        '200':
+          description: List of products
+  /products/{id}/quantity:
+    put:
+      summary: Update product quantity
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity: { type: integer }
+      responses:
+        '200':
+          description: Product updated
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

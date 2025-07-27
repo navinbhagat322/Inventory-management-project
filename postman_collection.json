@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "Inventory Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\": \"admin\", \"password\": \"admin123\"}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/auth/login"
+      }
+    },
+    {
+      "name": "Create Product",
+      "request": {
+        "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Sample Product\", \"type\": \"Electronics\", \"sku\": \"ELC001\", \"image_url\": \"\", \"description\": \"Sample description\", \"quantity\": 100, \"price\": 29.99}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/products"
+      }
+    },
+    {
+      "name": "Update Product Quantity",
+      "request": {
+        "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"quantity\": 50}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/products/{{productId}}/quantity"
+      }
+    },
+    {
+      "name": "Get Products",
+      "request": {
+        "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/products?page=1&limit=10"
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" },
+    { "key": "productId", "value": "" }
+  ]
+}
