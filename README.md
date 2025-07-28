@@ -1,5 +1,6 @@
-# Inventory Management System
 https://github.com/user-attachments/assets/cbe04f8c-e2af-4b26-a3f4-23b30ee2b7b6
+
+# Inventory Management System
 This is a full-stack inventory management system designed to manage products and user authentication for a small business. It exposes REST APIs for user login, product management, and inventory tracking, with an optional admin portal and analytics. The application is built using React for the frontend, Node.js with Express for the backend, and MongoDB for the database, all containerized with Docker.
 
 ## Features
